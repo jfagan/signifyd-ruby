@@ -244,7 +244,9 @@ module Signifyd
     # are necessary, some are not.
     case method.to_s
     when 'get'
-      if options.has_key?(:order_id)
+      if options.has_key?(:order_id) && options.has_key?(:analysis)
+        url = url.gsub('cases', "cases/#{options[:order_id]}/analysis")
+      elsif options.has_key?(:order_id) 
         url = url.gsub('cases', "orders/#{options[:order_id]}/case")
       end
     when 'post'
